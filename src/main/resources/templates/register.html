@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>新規登録 | TodoList</title>
+	<link rel="stylesheet" href="../static/register.css">
+</head>
+
+<body>
+	<div class="container">
+
+		<div class="card">
+			<h1 class="title">新規登録</h1>
+			<p class="subtitle">TodoList</p>
+
+			<!-- FORM -->
+			<form id="registerForm">
+
+				<div class="input-group">
+					<div class="icon">👤</div>
+					<input type="text" id="username" placeholder="ユーザー名" required>
+				</div>
+
+				<div class="input-group">
+					<div class="icon">✉️</div>
+					<input type="text" id="email" placeholder="メールアドレス@example.com" pattern="^[^\s@]+@[^\s@]+\.[^\s@]+$"
+						title="正しいメール形式で入力してください (例: example@gmail.com)" required>
+				</div>
+
+				<div class="input-group">
+					<span class="icon">🔒</span>
+					<input id="password" type="password" placeholder="パスワード" required>
+				</div>
+
+				<div class="agree">
+					<input type="checkbox" id="agree" required>
+					<label>利用規約に同意する</label>
+				</div>
+
+				<button type="submit" class="btn">登録する</button>
+
+				<!-- Thông báo ẩn ban đầu -->
+				<div id="successMsg" class="alert success-alert" style="display:none;">
+					🎉 登録が完了しました！
+				</div>
+
+				<div id="errorMsg" class="alert error-alert" style="display:none;">
+					⚠️ 入力内容をご確認ください。
+				</div>
+
+			</form>
+
+			<p class="login-text">
+				すでにアカウントをお持ちですか？
+				<a href="login.html">ログイン</a>
+			</p>
+
+		</div>
+
+	</div>
+
+	<script>
+		document.getElementById("registerForm").addEventListener("submit", function (event) {
+			event.preventDefault();
+
+			const email = document.getElementById("email");
+			const username = document.getElementById("username");
+			const password = document.getElementById("password");
+			const agree = document.getElementById("agree");
+
+			const successMsg = document.getElementById("successMsg");
+			const errorMsg = document.getElementById("errorMsg");
+
+			successMsg.style.display = "none";
+			errorMsg.style.display = "none";
+
+			// HTML5 tự kiểm tra pattern
+			if (!email.checkValidity() ||
+				username.value.trim() === "" ||
+				password.value.trim() === "" ||
+				!agree.checked) {
+
+				errorMsg.style.display = "block";
+				return;
+			}
+
+			successMsg.style.display = "block";
+		});
+	</script>
+
+</body>
+
+</html>
