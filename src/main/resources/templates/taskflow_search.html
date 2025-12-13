@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>TaskFlow</title>
+    <link rel="stylesheet" href="../static/taskflow_search.css">
+</head>
+
+<body>
+
+    <div class="task-container">
+
+        <div class="task-card">
+
+            <div class="task-header">
+                <h2>TaskFlow</h2>
+                <button class="logout-btn">ログアウト</button>
+            </div>
+
+            <div class="search-area">
+                <input type="text" id="searchInput" placeholder="search..." oninput="searchTask()">
+            </div>
+
+            <div class="task-list" id="taskList">
+                <!-- Task sẽ được thêm vào đây bằng JS -->
+            </div>
+            <!-- Nút thêm task -->
+            <button class="add-btn" onclick="goToAddTask()">＋</button>
+
+        </div>
+
+    </div>
+	
+
+
+<script>
+// ================== CHUYỂN ĐẾN TRANG THÊM TASK ==================
+function goToAddTask() {
+    localStorage.removeItem("editTaskIndex"); // Xóa index sửa để trang giay2 biết là thêm mới
+    window.location.href = "addtask.html";
+}
+
+// ================== LOAD TASKS TỪ LOCALSTORAGE ==================
+document.addEventListener("DOMContentLoaded", () => {
+    const tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+    tasks.forEach((task, index) => createTaskItem(task, index));
+});
+
+// ================== TẠO PHẦN TỬ TASK ==================
+function createTaskItem(task, index) {
+    let taskList = document.getElementById("taskList");
+
+    let div = document.createElement("div");
+    div.className = "task-item";
+
+    // Hiển thị ngày giờ
+    let timeDisplay = task.date;
+    if (task.time) {
+        timeDisplay += " " + task.time;
+    }
+
+    // Xử lý nội dung nếu chưa có
+    let content = task.content || "";
+
+    div.innerHTML = `
+        <input type="checkbox">
+        <div class="task-info">
+            <div class="task-title">${task.title}</div>
+            <div class="task-content">${content}</div>
+            <div class="task-time">${timeDisplay}</div>
+        </div>
+        <div class="task-actions">
+            <button class="edit" onclick="editTask(${index})">✏️</button>
+            <button class="delete" onclick="deleteTask(this)">🗑️</button>
+        </div>
+    `;
+
+    taskList.appendChild(div);
+}
+
+// ================== XÓA TASK ==================
+function deleteTask(btn) {
+    // Xóa khỏi giao diện
+    let item = btn.closest(".task-item");
+    item.remove();
+    
+    // TODO: Cần cập nhật lại localStorage nếu muốn xóa vĩnh viễn
+    // Hiện tại chỉ xóa trên giao diện theo yêu cầu luồng chính
+}
+
+// ================== SỬA TASK ==================
+function editTask(index) {
+    // Lưu chỉ số task cần sửa vào localStorage
+    localStorage.setItem("editTaskIndex", index);
+    // Chuyển sang trang addtask.html
+    window.location.href = "addtask.html";	
+}
+
+// ================== TÌM KIẾM TASK ==================
+function searchTask() {
+    let keyword = document.getElementById("searchInput").value.toLowerCase();
+    let tasks = document.querySelectorAll(".task-item");
+
+    tasks.forEach(task => {
+        let title = task.querySelector(".task-title").innerText.toLowerCase();
+        let content = task.querySelector(".task-content").innerText.toLowerCase();
+        
+        if (title.includes(keyword) || content.includes(keyword)) {
+            task.style.display = "flex";
+        } else {
+            task.style.display = "none";
+        }
+    });
+}
+</script>
+
+</body>
+</html>

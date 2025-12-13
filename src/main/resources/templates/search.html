@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Task</title>
+    <link rel="stylesheet" href="../static/search.css">
+</head>
+<body>
+
+    <div class="container">
+        <h2 class="title">🔍 Search Task</h2>
+
+        <div class="search-box">
+            <input type="text" id="searchInput" placeholder="Type to search...">
+            <button onclick="searchTask()">Search</button>
+        </div>
+
+        <ul id="searchResults" class="task-list"></ul>
+
+        <a href="index.html" class="back-btn">⬅ Back to Home</a>
+    </div>
+
+    <script>
+		const searchInput = document.getElementById("searchInput");
+		const results = document.getElementById("searchResults");
+
+		searchInput.addEventListener("input", () => {
+		    let keyword = searchInput.value.toLowerCase();
+		    let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+
+		    results.innerHTML = "";
+
+		    let filtered = tasks.filter(t => t.toLowerCase().includes(keyword));
+
+		    if (filtered.length === 0) {
+		        results.innerHTML = "<li class='empty'>No matching tasks found</li>";
+		        return;
+		    }
+
+		    filtered.forEach(t => {
+		        let li = document.createElement("li");
+		        li.textContent = t;
+		        results.appendChild(li);
+		    });
+		});
+
+    </script>
+
+</body>
+</html>
