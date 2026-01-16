@@ -12,10 +12,19 @@
 
         <div class="task-card">
 
-            <div class="task-header">
+            <div class="task-header" style="position: relative;">
                 <h2>TaskFlow</h2>
-                <button class="logout-btn">ログアウト</button>
-            </div>
+				<button class="logout-btn" onclick="toggleLogoutPopup()">ログアウト</button>
+				                
+				                <!-- Bong bóng thông báo đăng xuất -->
+				                <div id="logoutPopup" class="logout-popup">
+				                    <p>Are you sure you want to log out?</p>
+				                    <div class="popup-actions">
+				                        <button class="confirm-btn" onclick="confirmLogout()">Yes</button>
+				                        <button class="cancel-btn" onclick="closeLogoutPopup()">No</button>
+				                    </div>
+				                </div>
+								</div>
 
             <div class="search-area">
                 <input type="text" id="searchInput" placeholder="search..." oninput="searchTask()">
@@ -34,6 +43,21 @@
 
 
 <script>
+	// ================== ĐĂNG XUẤT ==================
+	function toggleLogoutPopup() {
+	    const popup = document.getElementById("logoutPopup");
+	    popup.style.display = (popup.style.display === "block") ? "none" : "block";
+	}
+
+	function closeLogoutPopup() {
+	    document.getElementById("logoutPopup").style.display = "none";
+	}
+
+	function confirmLogout() {
+	    alert("Successfully logged out!");
+	    closeLogoutPopup();
+	    // window.location.href = "login.html"; // Chuyển hướng nếu có trang login
+	}
 // ================== CHUYỂN ĐẾN TRANG THÊM TASK ==================
 function goToAddTask() {
     localStorage.removeItem("editTaskIndex"); // Xóa index sửa để trang giay2 biết là thêm mới
