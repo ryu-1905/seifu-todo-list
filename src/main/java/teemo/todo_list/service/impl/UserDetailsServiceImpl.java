@@ -14,18 +14,18 @@ import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import teemo.todo_list.model.Account;
-import teemo.todo_list.repository.UserRepository;
+import teemo.todo_list.repository.AccountRepository;
 
 @Service
 @RequiredArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class UserDetailsServiceImpl implements UserDetailsService {
 
-    final UserRepository userRepository;
+    final AccountRepository userRepository;
 
     @Override
-    public UserDetails loadUserByUsername(String email) {
-        Account user = userRepository.findByEmail(email)
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        Account user = userRepository.findByEmail(username)
                 .orElseThrow(() -> new UsernameNotFoundException("User not found"));
 
         List<GrantedAuthority> authorities = List.of(new SimpleGrantedAuthority(user.getRole()));

@@ -4,25 +4,29 @@
 <head>
 	<meta charset="UTF-8">
 	<title>ログイン | TodoList</title>
-	<link rel="stylesheet" href="../static/login.css">
+	<link th:href="@{/css/login.css}" rel="stylesheet" />
 </head>
 
 <body>
 	<div class="container">
-
 		<div class="card">
 			<h1 class="title">ログイン</h1>
+			<!-- show error if exist-->
+					<div th:if="${error != null}">
+					    <div th:text="${error}"></div>
+					</div>
 
-			<form id="loginForm">
+
+			<form id="loginForm" method="post" th:action="@{/login}">
 
 				<div class="input-group">
 					<div class="icon">✉️</div>
-					<input type="text" id="email" placeholder="メールアドレス" required>
+					<input type="text" id="email" name="username" placeholder="メールアドレス" required>
 				</div>
 
 				<div class="input-group">
 					<div class="icon">🔑</div>
-					<input type="password" id="password" placeholder="パスワード" required>
+					<input type="password" id="password" name="password" placeholder="パスワード" required>
 				</div>
 
 				<div class="agree">
@@ -37,7 +41,7 @@
 				</div>
 				<p class="login-text">
 					新規登録はこちら
-					<a href="register.html">登録</a>
+					<a th:href="@{/register}">登録</a>
 				</p>
 
 			</form>
@@ -45,31 +49,31 @@
 
 	</div>
 
-	<script>
-		document.getElementById("loginForm").addEventListener("submit", function (event) {
-			event.preventDefault();
+<!--	outdate-->
+<!--	<script>-->
+<!--		document.getElementById("loginForm").addEventListener("submit", function (event) {-->
+<!--			event.preventDefault();-->
 
-			const email = document.getElementById("email");
-			const password = document.getElementById("password");
-			const agree = document.getElementById("agree");
+<!--			const email = document.getElementById("email");-->
+<!--			const password = document.getElementById("password");-->
+<!--			const agree = document.getElementById("agree");-->
 
-			const errorMsg = document.getElementById("errorMsg");
-			errorMsg.style.display = "none";
+<!--			const errorMsg = document.getElementById("errorMsg");-->
+<!--			errorMsg.style.display = "none";-->
 
-			// Thêm điều kiện !agree.checked
-			if (email.value.trim() === "" ||
-				password.value.trim() === "" ||
-				!agree.checked) {
+<!--			// Thêm điều kiện !agree.checked-->
+<!--			if (email.value.trim() === "" ||-->
+<!--				password.value.trim() === "" ||-->
+<!--				!agree.checked) {-->
 
-				errorMsg.style.display = "block"
-				return;
-			}
+<!--				errorMsg.style.display = "block"-->
+<!--				return;-->
+<!--			}-->
 
-			alert("ログイン成功！ (Fake Test)");
-		});
-	</script>
+<!--			alert("ログイン成功！ (Fake Test)");-->
+<!--		});-->
+<!--	</script>-->
 
-	</script>
 
 </body>
 

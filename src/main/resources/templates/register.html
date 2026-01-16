@@ -4,38 +4,43 @@
 <head>
 	<meta charset="UTF-8">
 	<title>新規登録 | TodoList</title>
-	<link rel="stylesheet" href="../static/register.css">
+	<link th:href="@{/css/register.css}" rel="stylesheet" />
 </head>
 
 <body>
 	<div class="container">
-
 		<div class="card">
+			
 			<h1 class="title">新規登録</h1>
 			<p class="subtitle">TodoList</p>
+			<!-- show error if exist-->
+					<div th:if="${error != null}">
+							    <div th:text="${error}"></div>
+							</div>
 
 			<!-- FORM -->
-			<form id="registerForm">
-
-				<div class="input-group">
+			<form id="registerForm" method="post" th:action="@{/register}">
+				<label class="input-group">
 					<div class="icon">👤</div>
-					<input type="text" id="username" placeholder="ユーザー名" required>
-				</div>
+					<input type="text" id="username" name="username" placeholder="ユーザー名" required>
+				</label>
 
-				<div class="input-group">
+				<label class="input-group">
 					<div class="icon">✉️</div>
-					<input type="text" id="email" placeholder="メールアドレス@example.com" pattern="^[^\s@]+@[^\s@]+\.[^\s@]+$"
-						title="正しいメール形式で入力してください (例: example@gmail.com)" required>
-				</div>
+					<input type="text" id="email" name="email" placeholder="メールアドレス@example.com" required>
+				</label>
 
-				<div class="input-group">
+				<label class="input-group">
 					<span class="icon">🔒</span>
-					<input id="password" type="password" placeholder="パスワード" required>
-				</div>
+					<input id="password" type="password" name="password" placeholder="パスワード" required>
+				</label>
 
 				<div class="agree">
 					<input type="checkbox" id="agree" required>
-					<label>利用規約に同意する</label>
+					<label for="agree">利用規約に同意する</label>
+					<button type="button" id="showTerms" class="terms-btn">
+						利用規約を見る
+					</button>
 				</div>
 
 				<button type="submit" class="btn">登録する</button>
@@ -53,42 +58,68 @@
 
 			<p class="login-text">
 				すでにアカウントをお持ちですか？
-				<a href="login.html">ログイン</a>
+				<a th:href="@{/login}">ログイン</a>
 			</p>
 
 		</div>
 
 	</div>
+	<div id="termsModal" class="terms-modal" style="display:none;">
+		<div class="terms-content">
+			<h2>利用規約</h2>
+			<p>
+				ここに利用規約の内容を記載します。<br>
+				・個人情報の取り扱い<br>
+				・サービス利用条件<br>
+				・禁止事項 など
+			</p>
+			<!-- ⚠️ CẢNH BÁO -->
+			<p class="terms-warning">
+				本サービスでは、パスワードを紛失した場合、再発行や復旧はできません。<br>
+				必ずご自身で安全な場所に保存してください。
+			</p>
+
+			<button type="button" id="closeTerms" class="btn">
+				閉じる
+			</button>
+		</div>
+	</div>
 
 	<script>
-		document.getElementById("registerForm").addEventListener("submit", function (event) {
-			event.preventDefault();
+		document.addEventListener("DOMContentLoaded", function () {
 
-			const email = document.getElementById("email");
-			const username = document.getElementById("username");
-			const password = document.getElementById("password");
-			const agree = document.getElementById("agree");
+			const emailInput = document.getElementById("email");
+			const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-			const successMsg = document.getElementById("successMsg");
-			const errorMsg = document.getElementById("errorMsg");
+			emailInput.addEventListener("input", function () {
+				// Xóa lỗi khi người dùng nhập lại
+				emailInput.setCustomValidity("");
+			});
 
-			successMsg.style.display = "none";
-			errorMsg.style.display = "none";
+			emailInput.addEventListener("blur", function () {
+				if (!emailRegex.test(emailInput.value)) {
+					emailInput.setCustomValidity(
+						"正しいメール形式で入力してください (例: example@gmail.com)"
+					);
+					emailInput.reportValidity(); // hiện bubble trỏ vào input
+				}
+			});
 
-			// HTML5 tự kiểm tra pattern
-			if (!email.checkValidity() ||
-				username.value.trim() === "" ||
-				password.value.trim() === "" ||
-				!agree.checked) {
-
-				errorMsg.style.display = "block";
-				return;
-			}
-
-			successMsg.style.display = "block";
 		});
-	</script>
+		// ===== TERMS MODAL =====
+		const showBtn = document.getElementById("showTerms");
+		const closeBtn = document.getElementById("closeTerms");
+		const modal = document.getElementById("termsModal");
 
+		showBtn.addEventListener("click", function () {
+			modal.style.display = "flex";
+		});
+
+		closeBtn.addEventListener("click", function () {
+			modal.style.display = "none";
+		});
+
+	</script>
 </body>
 
 </html>
