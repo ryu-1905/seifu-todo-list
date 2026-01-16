@@ -151,3 +151,49 @@ body {
 .input-error:focus {
 	border: 1px solid #ff0000 !important;
 }
+
+.terms-btn {
+	margin-left: 8px;
+	font-size: 12px;
+	background: none;
+	border: none;
+	color: #007bff;
+	cursor: pointer;
+	text-decoration: underline;
+}
+
+.terms-modal {
+	position: fixed;
+	inset: 0;
+	background: rgba(0, 0, 0, 0.5);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	z-index: 1000;
+}
+
+.terms-content {
+	background: #fff;
+	padding: 20px;
+	width: 90%;
+	max-width: 400px;
+	border-radius: 8px;
+	display: block;
+}
+
+.terms-content .btn {
+	display: block;
+	margin: 20px auto 0;
+	/* center ngang */
+}
+
+.terms-warning {
+	color: #d93025;
+	/* đỏ cảnh báo */
+	font-weight: bold;
+	margin-top: 16px;
+	border: 1px solid #d93025;
+	padding: 10px;
+	border-radius: 6px;
+	background-color: #fff5f5;
+}
