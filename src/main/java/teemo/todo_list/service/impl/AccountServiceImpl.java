@@ -20,12 +20,12 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     public void register(String username, String email, String password) throws IllegalStateException {
-    	accountRepository.findByEmail(email)
+        accountRepository.findByEmail(email)
                 .ifPresent(user -> {
                     throw new IllegalStateException("Email already in use");
                 });
 
-    	accountRepository.save(new Account(username, email, passwordEncoder.encode(password)));
+        accountRepository.save(new Account(username, email, passwordEncoder.encode(password)));
     }
 
 }

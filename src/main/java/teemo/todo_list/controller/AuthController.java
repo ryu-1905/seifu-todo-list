@@ -45,7 +45,7 @@ public class AuthController {
         } catch (IllegalStateException e) {
             return "redirect:/register?error=true";
         }
-        
+
         return "redirect:/login";
     }
 }

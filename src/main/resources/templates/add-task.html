@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Create Task</title>
+
+    <link th:href="@{/css/add-task.css}" rel="stylesheet" />
+  </head>
+
+  <body>
+    <form class="task-form" method="post" th:action="@{/add-task}">
+      <h2 id="formTitle">📝 NEW TASK</h2>
+
+      <label
+        >Title
+        <input
+          id="title"
+          type="text"
+          name="title"
+          placeholder="Re-enter title!..."
+      /></label>
+
+      <label
+        >Content
+        <textarea
+          id="content"
+          name="content"
+          placeholder="Please enter the content!..."
+        ></textarea>
+      </label>
+
+      <label>
+        Date Time<input id="date" type="datetime-local" name="dateTime"
+      /></label>
+
+      <div class="btn-area">
+        <button class="back-btn"><a th:href="@{/}">⬅Back</a></button>
+        <button class="save-btn" type="submit">Save Task</button>
+      </div>
+    </form>
+  </body>
+</html>

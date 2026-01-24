@@ -1,0 +1,75 @@
+@charset "UTF-8";
+body {
+  margin: 0;
+  font-family: "Segoe UI", sans-serif;
+  background: linear-gradient(#8fd3f4, #c1f5d0);
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+* {
+  box-sizing: border-box; /* Đảm bảo padding không làm vỡ khung */
+}
+
+.task-form {
+  width: 450px;
+  background: white;
+  padding: 25px;
+  border-radius: 15px;
+  box-shadow: 0 5px 12px rgba(0, 0, 0, 0.15);
+}
+
+h2 {
+  text-align: center;
+  color: #27b4c7;
+  margin-bottom: 20px;
+}
+
+label {
+  font-weight: bold;
+  margin-top: 10px;
+  display: block;
+}
+
+input,
+textarea {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+textarea {
+  height: 120px;
+}
+
+.btn-area {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.back-btn,
+.save-btn {
+  padding: 12px 20px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.back-btn {
+  background: #ccc;
+}
+
+.save-btn {
+  background: #27b4c7;
+  color: white;
+}
+
+.save-btn:hover {
+  background: #1da6b7;
+}

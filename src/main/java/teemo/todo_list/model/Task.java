@@ -1,5 +1,9 @@
 package teemo.todo_list.model;
 
+import java.time.LocalDateTime;
+
+import org.springframework.format.annotation.DateTimeFormat;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -16,26 +20,27 @@ import lombok.experimental.FieldDefaults;
 @Setter
 @NoArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class Account {
+public class Task {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
 
     @Column(nullable = false)
-    String username;
-
-    @Column(nullable = false, unique = true)
-    String email;
+    String title;
 
     @Column(nullable = false)
-    String password;
+    String content;
+
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
+    @Column(nullable = false)
+    LocalDateTime dateTime;
 
     @Column(nullable = false)
-    String role = "USER";
+    Boolean completed = false;
 
-    public Account(String username, String email, String password) {
-        this.username = username;
-        this.email = email;
-        this.password = password;
+    public Task(String title, String content, LocalDateTime dateTime) {
+        this.title = title;
+        this.content = content;
+        this.dateTime = dateTime;
     }
 }
