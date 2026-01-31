@@ -4,6 +4,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -21,7 +22,7 @@ public class AuthController {
     final AccountService accountService;
 
     @GetMapping("/login")
-    public String login(Model model, @RequestParam(required = false) Boolean error) {
+    public String getLoginPage(Model model, @RequestParam(required = false) Boolean error) {
         if (error != null && error) {
             model.addAttribute("error", "Invalid username or password.");
         }
@@ -30,7 +31,7 @@ public class AuthController {
     }
 
     @GetMapping("/register")
-    public String register(Model model, @RequestParam(required = false) Boolean error) {
+    public String GetRegisterPage(Model model, @RequestParam(required = false) Boolean error) {
         if (error != null && error) {
             model.addAttribute("error", "Email already in use");
         }
@@ -47,5 +48,15 @@ public class AuthController {
         }
 
         return "redirect:/login";
+    }
+    
+    @GetMapping("/profile/{id}")
+    public String getProfile(@PathVariable Long id,Model model) {
+        return "profile";
+    }
+
+    @GetMapping("/profile")
+    public String getProfilePage() {
+        return "profile";
     }
 }

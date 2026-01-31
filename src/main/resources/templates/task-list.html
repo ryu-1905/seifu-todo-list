@@ -1,114 +1,101 @@
 <!doctype html>
 <html lang="ja">
-  <head>
-    <meta charset="UTF-8" />
-    <title>Tasks</title>
-    <link th:href="@{/css/task-list.css}" rel="stylesheet" />
-  </head>
 
-  <body>
-    <div class="task-container">
-      <div class="task-card">
-        <div class="task-header" style="position: relative">
-          <h2>TaskFlow</h2>
+<head>
+  <meta charset="UTF-8" />
+  <title>Tasks</title>
+  <link th:href="@{/css/task-list.css}" rel="stylesheet" />
+</head>
+
+<body>
+  <div class="task-container">
+    <div class="task-card">
+      <div class="task-header" style="position: relative">
+        <h2>TaskFlow</h2>
+        <div class="header-actions">
+          <a th:href="@{/profile}" class="profile-btn-header">Profile</a>
           <button class="logout-btn" onclick="toggleLogoutPopup()">
             ログアウト
           </button>
-
-          <div id="logoutPopup" class="logout-popup">
-            <p>Are you sure you want to log out?</p>
-            <div class="popup-actions">
-              <form method="post" th:action="@{/logout}">
-                <button type="submit" class="confirm-btn">Yes</button>
-              </form>
-              <button class="cancel-btn" onclick="closeLogoutPopup()">
-                No
-              </button>
-            </div>
+        </div>
+        <div id="logoutPopup" class="logout-popup">
+          <p>Are you sure you want to log out?</p>
+          <div class="popup-actions">
+            <form method="post" th:action="@{/logout}">
+              <button type="submit" class="confirm-btn">Yes</button>
+            </form>
+            <button class="cancel-btn" onclick="closeLogoutPopup()">
+              No
+            </button>
           </div>
         </div>
-
-        <div class="search-area">
-          <input
-            type="text"
-            id="searchInput"
-            placeholder="search..."
-            oninput="searchTask()"
-          />
-        </div>
-
-        <div class="task-list" id="taskList">
-          <ul>
-            <li th:each="task : ${tasks}" class="task-item">
-              <form th:action="@{'/task-complete/' + ${task.id}}" method="post">
-                <input
-                  type="checkbox"
-                  th:checked="${task.completed}"
-                  onchange="this.form.submit()"
-                />
-              </form>
-              <div class="task-info">
-                <div class="task-title" th:text="${task.title}"></div>
-                <div class="task-content" th:text="${task.content}"></div>
-                <div
-                  class="task-time"
-                  th:text="${#temporals.format(task.dateTime, 'yyyy-MM-dd HH:mm')}"
-                ></div>
-              </div>
-              <div class="task-actions">
-                <button class="edit">
-                  <a th:href="@{'/edit-task/' + ${task.id}}">✏️</a>
-                </button>
-                <button class="delete">
-                  <a th:href="@{'/delete-task/' + ${task.id}}"> 🗑️</a>
-                </button>
-              </div>
-            </li>
-          </ul>
-        </div>
-        <button class="add-btn"><a th:href="@{/add-task}">＋</a></button>
       </div>
+      <div class="search-area">
+        <input type="text" id="searchInput" placeholder="search..." oninput="searchTask()" />
+      </div>
+      <div class="task-list" id="taskList">
+        <ul>
+          <li th:each="task : ${tasks}" class="task-item">
+            <form th:action="@{'/task-complete/' + ${task.id}}" method="post">
+              <input type="checkbox" th:checked="${task.completed}" onchange="this.form.submit()" />
+            </form>
+            <div class="task-info">
+              <div class="task-title" th:text="${task.title}"></div>
+              <div class="task-content" th:text="${task.content}"></div>
+              <div class="task-time" th:text="${#temporals.format(task.dateTime, 'yyyy-MM-dd HH:mm')}"></div>
+            </div>
+            <div class="task-actions">
+              <button class="edit">
+                <a th:href="@{'/edit-task/' + ${task.id}}">✏️</a>
+              </button>
+              <button class="delete">
+                <a th:href="@{'/delete-task/' + ${task.id}}"> 🗑️</a>
+              </button>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <a class="add-btn" th:href="@{/add-task}" style="display: inline-block; text-decoration: none;">
+        ＋
+      </a>
     </div>
-
-    <script th:inline="javascript">
-      function handleCheckboxClick(taskId) {
-        const link = document.getElementById(`link-${taskId}`);
-        if (link) {
-          link.click();
+  </div>
+  <script th:inline="javascript">
+    function handleCheckboxClick(taskId) {
+      const link = document.getElementById(`link-${taskId}`);
+      if (link) {
+        link.click();
+      }
+    }
+    function toggleLogoutPopup() {
+      const popup = document.getElementById("logoutPopup");
+      popup.style.display =
+        popup.style.display === "block" ? "none" : "block";
+    }
+    function closeLogoutPopup() {
+      document.getElementById("logoutPopup").style.display = "none";
+    }
+    function searchTask() {
+      let keyword = document
+        .getElementById("searchInput")
+        .value.toLowerCase();
+      let tasks = document.querySelectorAll(".task-item");
+      tasks.forEach((task) => {
+        let taskInfo = task.querySelector(".task-info");
+        let title = taskInfo
+          .querySelector(".task-title")
+          .innerText.toLowerCase();
+        let content = taskInfo
+          .querySelector(".task-content")
+          .innerText.toLowerCase();
+        if (title.includes(keyword) || content.includes(keyword)) {
+          task.style.display = "block";
+        } else {
+          task.style.display = "none";
         }
-      }
-      function toggleLogoutPopup() {
-        const popup = document.getElementById("logoutPopup");
-        popup.style.display =
-          popup.style.display === "block" ? "none" : "block";
-      }
+      });
+    }
+  </script>
+</body>
 
-      function closeLogoutPopup() {
-        document.getElementById("logoutPopup").style.display = "none";
-      }
-
-      function searchTask() {
-        let keyword = document
-          .getElementById("searchInput")
-          .value.toLowerCase();
-        let tasks = document.querySelectorAll(".task-item");
-
-        tasks.forEach((task) => {
-          let taskInfo = task.querySelector(".task-info");
-          let title = taskInfo
-            .querySelector(".task-title")
-            .innerText.toLowerCase();
-          let content = taskInfo
-            .querySelector(".task-content")
-            .innerText.toLowerCase();
-
-          if (title.includes(keyword) || content.includes(keyword)) {
-            task.style.display = "block";
-          } else {
-            task.style.display = "none";
-          }
-        });
-      }
-    </script>
-  </body>
 </html>
