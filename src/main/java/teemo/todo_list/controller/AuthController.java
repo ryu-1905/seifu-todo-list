@@ -49,14 +49,16 @@ public class AuthController {
 
         return "redirect:/login";
     }
-    
+
     @GetMapping("/profile/{id}")
-    public String getProfile(@PathVariable Long id,Model model) {
+    public String getProfile(@PathVariable Long id, Model model) {
+        model.addAttribute("account", accountService.getCurrentAccount());
         return "profile";
     }
 
-    @GetMapping("/profile")
-    public String getProfilePage() {
-        return "profile";
+    @PostMapping("/profile")
+    public String updateProfile(@ModelAttribute Account account) {
+        accountService.updateAccount(account);
+        return "redirect:/";
     }
 }

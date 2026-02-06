@@ -10,6 +10,7 @@ import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import teemo.todo_list.model.Task;
+import teemo.todo_list.service.AccountService;
 import teemo.todo_list.service.TaskService;
 import org.springframework.web.bind.annotation.PathVariable;
 
@@ -19,9 +20,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 public class TaskController {
 
     final TaskService taskService;
+    final AccountService accountService;
 
     @GetMapping("/")
     public String home(Model model) {
+        model.addAttribute("account", accountService.getCurrentAccount());
         model.addAttribute("tasks", taskService.getAllTasks());
         return "task-list";
     }
