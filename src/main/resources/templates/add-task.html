@@ -9,10 +9,10 @@
 
   <body>
     <form class="task-form" method="post" th:action="@{/add-task}">
-      <h2 id="formTitle">📝 NEW TASK</h2>
+      <h2 id="formTitle">📝 タスク追加</h2>
 
       <label
-        >Title
+        >タイトル
         <input
           id="title"
           type="text"
@@ -21,7 +21,7 @@
       /></label>
 
       <label
-        >Content
+        >コンテンツ
         <textarea
           id="content"
           name="content"
@@ -30,12 +30,24 @@
       </label>
 
       <label>
-        Date Time<input id="date" type="datetime-local" name="dateTime"
+        日時<input id="date" type="datetime-local" name="dateTime"
       /></label>
 
       <div class="btn-area">
-        <a class="back-btn" th:href="@{/}" style="display: inline-block; text-decoration: none; padding: 10px; border-radius: 5px; background-color: #f0f0f0; text-align: center;">⬅Back</a>
-        <button class="save-btn" type="submit">Save Task</button>
+        <a
+          class="back-btn"
+          th:href="@{/}"
+          style="
+            display: inline-block;
+            text-decoration: none;
+            padding: 10px;
+            border-radius: 5px;
+            background-color: #f0f0f0;
+            text-align: center;
+          "
+          >⬅戻る</a
+        >
+        <button class="save-btn" type="submit">保存</button>
       </div>
     </form>
   </body>

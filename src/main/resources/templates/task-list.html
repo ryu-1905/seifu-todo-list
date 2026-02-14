@@ -10,25 +10,25 @@
     <div class="task-container">
       <div class="task-card">
         <div class="task-header" style="position: relative">
-          <h2>TaskFlow</h2>
+          <h2>タスク一覧</h2>
           <div class="header-actions">
             <a
               th:href="@{'/profile/' + ${account.id}}"
               class="profile-btn-header"
-              >Profile</a
+              >プロファイル</a
             >
             <button class="logout-btn" onclick="toggleLogoutPopup()">
               ログアウト
             </button>
           </div>
           <div id="logoutPopup" class="logout-popup">
-            <p>Are you sure you want to log out?</p>
+            <p>ログアウトしてもよろしいですか？</p>
             <div class="popup-actions">
               <form method="post" th:action="@{/logout}">
-                <button type="submit" class="confirm-btn">Yes</button>
+                <button type="submit" class="confirm-btn">はい</button>
               </form>
               <button class="cancel-btn" onclick="closeLogoutPopup()">
-                No
+                いいえ
               </button>
             </div>
           </div>

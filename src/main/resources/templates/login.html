@@ -1,80 +1,79 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <title>ログイン | TodoList</title>
+    <link th:href="@{/css/login.css}" rel="stylesheet" />
+  </head>
 
-<head>
-	<meta charset="UTF-8">
-	<title>ログイン | TodoList</title>
-	<link th:href="@{/css/login.css}" rel="stylesheet" />
-</head>
+  <body>
+    <div class="container">
+      <div class="card">
+        <h1 class="title">ログイン</h1>
+        <!-- show error if exist-->
+        <div th:if="${error != null}">
+          <div th:text="${error}"></div>
+        </div>
 
-<body>
-	<div class="container">
-		<div class="card">
-			<h1 class="title">ログイン</h1>
-			<!-- show error if exist-->
-					<div th:if="${error != null}">
-					    <div th:text="${error}"></div>
-					</div>
+        <form id="loginForm" method="post" th:action="@{/login}">
+          <div class="input-group">
+            <div class="icon">✉️</div>
+            <input
+              type="text"
+              id="email"
+              name="username"
+              placeholder="メールアドレス"
+              required
+            />
+          </div>
 
+          <div class="input-group">
+            <div class="icon">🔑</div>
+            <input
+              type="password"
+              id="password"
+              name="password"
+              placeholder="パスワード"
+              required
+            />
+          </div>
 
-			<form id="loginForm" method="post" th:action="@{/login}">
+          <button type="submit" class="btn">ログイン</button>
 
-				<div class="input-group">
-					<div class="icon">✉️</div>
-					<input type="text" id="email" name="username" placeholder="メールアドレス" required>
-				</div>
+          <div id="errorMsg" class="alert error-alert" style="display: none">
+            ⚠️ 入力内容をご確認ください。
+          </div>
+          <p class="login-text">
+            新規登録はこちら
+            <a th:href="@{/register}">登録</a>
+          </p>
+        </form>
+      </div>
+    </div>
 
-				<div class="input-group">
-					<div class="icon">🔑</div>
-					<input type="password" id="password" name="password" placeholder="パスワード" required>
-				</div>
+    <!--	outdate-->
+    <!--	<script>-->
+    <!--		document.getElementById("loginForm").addEventListener("submit", function (event) {-->
+    <!--			event.preventDefault();-->
 
-				<div class="agree">
-					<input type="checkbox" id="agree">
-					<label>利用規約に同意する</label>
-				</div>
+    <!--			const email = document.getElementById("email");-->
+    <!--			const password = document.getElementById("password");-->
+    <!--			const agree = document.getElementById("agree");-->
 
-				<button type="submit" class="btn">ログイン</button>
+    <!--			const errorMsg = document.getElementById("errorMsg");-->
+    <!--			errorMsg.style.display = "none";-->
 
-				<div id="errorMsg" class="alert error-alert" style="display:none;">
-					⚠️ 入力内容をご確認ください。
-				</div>
-				<p class="login-text">
-					新規登録はこちら
-					<a th:href="@{/register}">登録</a>
-				</p>
+    <!--			// Thêm điều kiện !agree.checked-->
+    <!--			if (email.value.trim() === "" ||-->
+    <!--				password.value.trim() === "" ||-->
+    <!--				!agree.checked) {-->
 
-			</form>
-		</div>
+    <!--				errorMsg.style.display = "block"-->
+    <!--				return;-->
+    <!--			}-->
 
-	</div>
-
-<!--	outdate-->
-<!--	<script>-->
-<!--		document.getElementById("loginForm").addEventListener("submit", function (event) {-->
-<!--			event.preventDefault();-->
-
-<!--			const email = document.getElementById("email");-->
-<!--			const password = document.getElementById("password");-->
-<!--			const agree = document.getElementById("agree");-->
-
-<!--			const errorMsg = document.getElementById("errorMsg");-->
-<!--			errorMsg.style.display = "none";-->
-
-<!--			// Thêm điều kiện !agree.checked-->
-<!--			if (email.value.trim() === "" ||-->
-<!--				password.value.trim() === "" ||-->
-<!--				!agree.checked) {-->
-
-<!--				errorMsg.style.display = "block"-->
-<!--				return;-->
-<!--			}-->
-
-<!--			alert("ログイン成功！ (Fake Test)");-->
-<!--		});-->
-<!--	</script>-->
-
-
-</body>
-
+    <!--			alert("ログイン成功！ (Fake Test)");-->
+    <!--		});-->
+    <!--	</script>-->
+  </body>
 </html>
