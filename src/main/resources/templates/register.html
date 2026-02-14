@@ -1,125 +1,98 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>新規登録 | TodoList</title>
+    <link th:href="@{/css/register.css}" rel="stylesheet" />
+  </head>
 
-<head>
-	<meta charset="UTF-8">
-	<title>新規登録 | TodoList</title>
-	<link th:href="@{/css/register.css}" rel="stylesheet" />
-</head>
+  <body>
+    <div class="container">
+      <div class="card">
+        <h1 class="title">新規登録</h1>
+        <p class="subtitle">TodoList</p>
+        <!-- show error if exist-->
+        <div th:if="${error != null}">
+          <div th:text="${error}"></div>
+        </div>
 
-<body>
-	<div class="container">
-		<div class="card">
-			
-			<h1 class="title">新規登録</h1>
-			<p class="subtitle">TodoList</p>
-			<!-- show error if exist-->
-					<div th:if="${error != null}">
-							    <div th:text="${error}"></div>
-							</div>
+        <!-- FORM -->
+        <form id="registerForm" method="post" th:action="@{/register}">
+          <label class="input-group">
+            <div class="icon">👤</div>
+            <input
+              type="text"
+              id="username"
+              name="username"
+              placeholder="ユーザー名"
+              required
+            />
+          </label>
 
-			<!-- FORM -->
-			<form id="registerForm" method="post" th:action="@{/register}">
-				<label class="input-group">
-					<div class="icon">👤</div>
-					<input type="text" id="username" name="username" placeholder="ユーザー名" required>
-				</label>
+          <label class="input-group">
+            <div class="icon">✉️</div>
+            <input
+              type="text"
+              id="email"
+              name="email"
+              placeholder="メールアドレス@example.com"
+              required
+            />
+          </label>
 
-				<label class="input-group">
-					<div class="icon">✉️</div>
-					<input type="text" id="email" name="email" placeholder="メールアドレス@example.com" required>
-				</label>
+          <label class="input-group">
+            <span class="icon">🔒</span>
+            <input
+              id="password"
+              type="password"
+              name="password"
+              placeholder="パスワード"
+              required
+            />
+          </label>
 
-				<label class="input-group">
-					<span class="icon">🔒</span>
-					<input id="password" type="password" name="password" placeholder="パスワード" required>
-				</label>
+          <button type="submit" class="btn">登録する</button>
 
-				<div class="agree">
-					<input type="checkbox" id="agree" required>
-					<label for="agree">利用規約に同意する</label>
-					<button type="button" id="showTerms" class="terms-btn">
-						利用規約を見る
-					</button>
-				</div>
+          <!-- Thông báo ẩn ban đầu -->
+          <div
+            id="successMsg"
+            class="alert success-alert"
+            style="display: none"
+          >
+            🎉 登録が完了しました！
+          </div>
 
-				<button type="submit" class="btn">登録する</button>
+          <div id="errorMsg" class="alert error-alert" style="display: none">
+            ⚠️ 入力内容をご確認ください。
+          </div>
+        </form>
 
-				<!-- Thông báo ẩn ban đầu -->
-				<div id="successMsg" class="alert success-alert" style="display:none;">
-					🎉 登録が完了しました！
-				</div>
+        <p class="login-text">
+          すでにアカウントをお持ちですか？
+          <a th:href="@{/login}">ログイン</a>
+        </p>
+      </div>
+    </div>
 
-				<div id="errorMsg" class="alert error-alert" style="display:none;">
-					⚠️ 入力内容をご確認ください。
-				</div>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const emailInput = document.getElementById("email");
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-			</form>
+        emailInput.addEventListener("input", function () {
+          // Xóa lỗi khi người dùng nhập lại
+          emailInput.setCustomValidity("");
+        });
 
-			<p class="login-text">
-				すでにアカウントをお持ちですか？
-				<a th:href="@{/login}">ログイン</a>
-			</p>
-
-		</div>
-
-	</div>
-	<div id="termsModal" class="terms-modal" style="display:none;">
-		<div class="terms-content">
-			<h2>利用規約</h2>
-			<p>
-				ここに利用規約の内容を記載します。<br>
-				・個人情報の取り扱い<br>
-				・サービス利用条件<br>
-				・禁止事項 など
-			</p>
-			<!-- ⚠️ CẢNH BÁO -->
-			<p class="terms-warning">
-				本サービスでは、パスワードを紛失した場合、再発行や復旧はできません。<br>
-				必ずご自身で安全な場所に保存してください。
-			</p>
-
-			<button type="button" id="closeTerms" class="btn">
-				閉じる
-			</button>
-		</div>
-	</div>
-
-	<script>
-		document.addEventListener("DOMContentLoaded", function () {
-
-			const emailInput = document.getElementById("email");
-			const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-			emailInput.addEventListener("input", function () {
-				// Xóa lỗi khi người dùng nhập lại
-				emailInput.setCustomValidity("");
-			});
-
-			emailInput.addEventListener("blur", function () {
-				if (!emailRegex.test(emailInput.value)) {
-					emailInput.setCustomValidity(
-						"正しいメール形式で入力してください (例: example@gmail.com)"
-					);
-					emailInput.reportValidity(); // hiện bubble trỏ vào input
-				}
-			});
-
-		});
-		// ===== TERMS MODAL =====
-		const showBtn = document.getElementById("showTerms");
-		const closeBtn = document.getElementById("closeTerms");
-		const modal = document.getElementById("termsModal");
-
-		showBtn.addEventListener("click", function () {
-			modal.style.display = "flex";
-		});
-
-		closeBtn.addEventListener("click", function () {
-			modal.style.display = "none";
-		});
-
-	</script>
-</body>
-
+        emailInput.addEventListener("blur", function () {
+          if (!emailRegex.test(emailInput.value)) {
+            emailInput.setCustomValidity(
+              "正しいメール形式で入力してください (例: example@gmail.com)",
+            );
+            emailInput.reportValidity(); // hiện bubble trỏ vào input
+          }
+        });
+      });
+    </script>
+  </body>
 </html>

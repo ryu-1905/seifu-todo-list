@@ -1,221 +1,221 @@
 body {
-    margin: 0;
-    font-family: "Segoe UI", sans-serif;
-    background: linear-gradient(#8fd3f4, #c1f5d0);
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  margin: 0;
+  font-family: "Segoe UI", sans-serif;
+  background: linear-gradient(#8fd3f4, #c1f5d0);
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 a {
-    text-decoration: none;
+  text-decoration: none;
 }
 
 /* ===== CARD ===== */
 .task-card {
-    width: 550px;
-    background: white;
-    border-radius: 15px;
-    padding: 25px;
-    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+  width: 550px;
+  background: white;
+  border-radius: 15px;
+  padding: 25px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
 }
 
 /* ===== HEADER ===== */
 .task-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background: #27b4c7;
-    /* teal giống header login */
-    padding: 12px 20px;
-    border-radius: 10px;
-    color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #27b4c7;
+  /* teal giống header login */
+  padding: 12px 20px;
+  border-radius: 10px;
+  color: white;
 }
 
 .logout-btn {
-    background: white;
-    border: none;
-    padding: 5px 12px;
-    border-radius: 8px;
-    cursor: pointer;
-    font-weight: bold;
+  background: white;
+  border: none;
+  padding: 5px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
 }
 
 /* ===== SEARCH ===== */
 .search-area {
-    margin-top: 20px;
-    display: flex;
-    gap: 10px;
+  margin-top: 20px;
+  display: flex;
+  gap: 10px;
 }
 
 .search-area input {
-    flex: 1;
-    padding: 10px;
-    border-radius: 8px;
-    border: 1px solid #ccc;
+  flex: 1;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
 }
 
 .search-btn {
-    background: #f6a243;
-    /* màu cam của nút login */
-    border: none;
-    padding: 10px 18px;
-    border-radius: 8px;
-    cursor: pointer;
-    font-weight: bold;
-    color: white;
+  background: #f6a243;
+  /* màu cam của nút login */
+  border: none;
+  padding: 10px 18px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  color: white;
 }
 
 /* ===== TASK LIST ===== */
 .task-list {
-    margin-top: 20px;
-    max-height: 400px;
-    /* Giới hạn chiều cao danh sách */
-    overflow-y: auto;
-    /* Cho phép cuộn dọc khi danh sách quá dài */
-    padding-right: 5px;
-    /* Tạo khoảng cách nhỏ với thanh cuộn */
+  margin-top: 20px;
+  max-height: 400px;
+  /* Giới hạn chiều cao danh sách */
+  overflow-y: auto;
+  /* Cho phép cuộn dọc khi danh sách quá dài */
+  padding-right: 5px;
+  /* Tạo khoảng cách nhỏ với thanh cuộn */
 }
 
 .task-item {
-    background: #e7f9ff;
-    padding: 12px;
-    border-radius: 10px;
-    display: flex;
-    align-items: center;
-    margin-bottom: 12px;
-    gap: 10px;
+  background: #e7f9ff;
+  padding: 12px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  margin-bottom: 12px;
+  gap: 10px;
 }
 
 .task-info {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
 }
 
 .task-title {
-    font-weight: bold;
-    font-size: 16px;
-    color: #333;
+  font-weight: bold;
+  font-size: 16px;
+  color: #333;
 }
 
 .task-content {
-    font-size: 14px;
-    color: #555;
+  font-size: 14px;
+  color: #555;
 }
 
 .task-time {
-    font-size: 12px;
-    color: #888;
+  font-size: 12px;
+  color: #888;
 }
 
 .task-actions button {
-    background: transparent;
-    border: none;
-    font-size: 18px;
-    cursor: pointer;
+  background: transparent;
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
 }
 
 /* ===== ADD BUTTON ===== */
 .add-btn {
-    margin-top: 20px;
-    background: #27b4c7;
-    border: none;
-    width: 50px;
-    height: 50px;
-    border-radius: 12px;
-    color: white;
-    font-size: 28px;
-    cursor: pointer;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
+  margin-top: 20px;
+  background: #27b4c7;
+  border: none;
+  width: 50px;
+  height: 50px;
+  border-radius: 12px;
+  color: white;
+  font-size: 28px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
 }
 
 /* ===== LOGOUT POPUP ===== */
 .logout-popup {
-    display: none;
-    position: absolute;
-    top: 60px;
-    /* Hiển thị bên dưới nút logout */
-    right: 10px;
-    width: 220px;
-    background: white;
-    border-radius: 8px;
-    padding: 15px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-    z-index: 100;
-    color: #333;
-    animation: fadeIn 0.2s ease-in-out;
+  display: none;
+  position: absolute;
+  top: 60px;
+  /* Hiển thị bên dưới nút logout */
+  right: 10px;
+  width: 220px;
+  background: white;
+  border-radius: 8px;
+  padding: 15px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  z-index: 100;
+  color: #333;
+  animation: fadeIn 0.2s ease-in-out;
 }
 
 /* Mũi tên chỉ lên (tạo hiệu ứng bong bóng) */
 .logout-popup::after {
-    content: "";
-    position: absolute;
-    top: -10px;
-    right: 20px;
-    border-width: 0 10px 10px 10px;
-    border-style: solid;
-    border-color: transparent transparent white transparent;
+  content: "";
+  position: absolute;
+  top: -10px;
+  right: 20px;
+  border-width: 0 10px 10px 10px;
+  border-style: solid;
+  border-color: transparent transparent white transparent;
 }
 
 .logout-popup p {
-    margin: 0 0 15px 0;
-    font-size: 14px;
-    text-align: center;
-    font-weight: bold;
+  margin: 0 0 15px 0;
+  font-size: 14px;
+  text-align: center;
+  font-weight: bold;
 }
 
 .popup-actions {
-    display: flex;
-    justify-content: space-between;
-    gap: 10px;
+  display: flex;
+  justify-content: center;
+  gap: 5px;
 }
 
 .popup-actions button {
-    flex: 1;
-    padding: 8px 0;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 13px;
+  flex: 1;
+  padding: 8px 0;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 13px;
 }
 
 .confirm-btn {
-    background: #ff4d4d;
-    color: white;
+  background: #ff4d4d;
+  color: white;
 }
 
 .cancel-btn {
-    background: #e0e0e0;
-    color: #333;
+  background: #e0e0e0;
+  color: #333;
 }
 
 @keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(-10px);
-    }
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
 
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 .header-actions {
-    display: flex;
-    align-items: center;
-    gap: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 .profile-btn-header {
-    background: white;
-    border: none;
-    padding: 5px 12px;
-    border-radius: 8px;
-    cursor: pointer;
-    color: black;
+  background: white;
+  border: none;
+  padding: 5px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  color: black;
 }
